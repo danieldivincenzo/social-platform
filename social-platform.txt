@@ -1,0 +1,36 @@
+1.
+SELECT DISTINCT `users`.*
+FROM `users`
+JOIN `medias`
+ON `users`.`id` = `medias`.`user_id`
+JOIN `posts`
+ON `users`.`id` = `posts`.`user_id`
+WHERE `medias`.`type` = 'video'
+
+2.
+SELECT `posts`.*
+FROM `posts`
+LEFT JOIN `likes` 
+ON `posts`.`id` = `likes`.`post_id`
+WHERE `likes`.`post_id` IS NULL
+
+3.
+SELECT `post_id`, COUNT(*) AS 'Numero di likes'
+FROM `likes`
+GROUP BY `post_id`
+
+4.
+SELECT `users`.`username` AS 'Nome e cognome', COUNT(*) AS 'Numero di media caricati'
+FROM `medias`
+JOIN `users`
+ON `users`.`id` = `medias`.`user_id`
+GROUP BY `users`.`username`
+ORDER BY COUNT(*)
+
+5.
+SELECT `users`.`username` AS 'Utente', COUNT(*) AS 'Numero di likes'
+FROM `users`
+JOIN `likes`
+ON `users`.`id` = `likes`.`user_id`
+GROUP BY `users`.`username`
+ORDER BY COUNT(*)
